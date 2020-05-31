@@ -39,11 +39,7 @@ body{
     top:1vh;
     left:5vw;
 }
-.round{
-    border:0.3vmin solid gray;
-    border-radius: 100000vw;
-    width:8vw;
-}
+
 table tr td{
     padding: 3vmin;
 }
@@ -56,12 +52,33 @@ td{
     border-right: 0.1vmin solid black;
     border-bottom: 0.1vmin solid black;
 }
+
+/*---- Level size input: ---*/
+#sizeChoose {
+    font-size: 1.5em;
+    width: 8vw;
+    max-width: 150px;
+    min-width: 90px;
+    max-width: 200px;
+}
+
 /*------ Buttons: ----------*/
-#buttons{
+#buttons {
     position: absolute;
     left:5vw;
     top:10vh;
 }
+
+#buttons > * {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    border:0.3vmin solid gray;
+    border-radius: 100000vw;
+    width: 8vw;
+    max-width: 150px;
+    min-width: 90px;
+}
+
 #bt1{
     background-color:lightgreen;
 }
@@ -86,6 +103,7 @@ td{
 #bt8{
     background-color: chartreuse;
 }
+
 /*------ Right column: ----------*/
 #JSON{
     position: absolute;
