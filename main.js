@@ -83,18 +83,18 @@ const generateJSON = () => {
 }
 
 const loadJSON = () => {
-    var data = JSON.parse($("#JSON").val());
-    var size = data.size;
-    var tiles = data.tiles;
+    const data = JSON.parse($("#JSON").val());
+    const size = data.size;
+    const tiles = data.tiles;
 
     createBoard(size);
+    
     for (let i = 0; i < tiles.length; i++) {
-        var cellData = data.tiles[i];
-        var cell = document.getElementById("board").children[cellData.y].children[cellData.x];
-        var colorIndex = relations.findIndex((el) => {
-            return el.type == cellData.type;
-        });
-        var color = relations[colorIndex].color;
+        const cellData = data.tiles[i];
+        const cell = document.getElementById("board").children[cellData.y].children[cellData.x];
+        const colorIndex = relations.findIndex(el => el.type == cellData.type);
+        const color = relations[colorIndex].color;
+
         cell.setAttribute("class", color);
     }
 }
