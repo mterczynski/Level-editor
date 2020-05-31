@@ -3,8 +3,6 @@ const relations = [
     { type: "enemy", color: "red" },
     { type: "treasure", color: "dodgerblue" },
     { type: "light", color: "yellow" },
-    { type: "item1", color: "purple" },
-    { type: "item2", color: "cyan" },
     { type: "delete", color: "white" },
     { type: "player", color: "chartreuse" },
 ];
