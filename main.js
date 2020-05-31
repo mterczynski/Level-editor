@@ -1,6 +1,4 @@
-var activeType = "delete";
-var activeColor = "white";
-var relations = [
+const relations = [
     { type: "wall", color: "lightgreen" },
     { type: "enemy", color: "red" },
     { type: "treasure", color: "dodgerblue" },
@@ -9,9 +7,14 @@ var relations = [
     { type: "item2", color: "cyan" },
     { type: "delete", color: "white" },
     { type: "player", color: "chartreuse" },
-]
+];
 
-var createBoard = (size) => {
+let activeType = "delete";
+let activeColor = "white";
+
+let isInTilePlacementMode = true;
+
+const createBoard = (size) => {
     document.getElementById("sizeChoose").value = size;
     document.getElementById("board").innerHTML = "";
     for (var i = 0, buttons = document.getElementById("buttons").children; i < buttons.length; i++) {
@@ -29,10 +32,20 @@ var createBoard = (size) => {
         board.appendChild(tr);
     }
     $("table tr td").css("padding", 20 / size + "vw");
-    $("td").click(function (e) {
+
+    $("td").mousedown(function (e) {
         $(this).removeClass();
         $(this).addClass(activeColor);
         generateJSON();
+        isInTilePlacementMode = true;
+    });
+
+    $("td").mouseover(function (e) {
+        if(isInTilePlacementMode) {
+            $(this).removeClass();
+            $(this).addClass(activeColor);
+            generateJSON();
+        }
     });
 }
 
@@ -42,7 +55,7 @@ const generateJSON = () => {
     var output =
     {
         size: size,
-        level: []
+        tiles: []
     };
     var table = document.getElementById("board");
     for (var i = 0; i < size; i++) {
@@ -58,12 +71,11 @@ const generateJSON = () => {
                 var type = relations[typeIndex].type;
                 var cell =
                 {
-                    id: j + i * size + 1,
                     x: j,
-                    z: i,
+                    y: i,
                     type: type
                 };
-                output.level.push(cell);
+                output.tiles.push(cell);
             }
         }
     }
@@ -73,11 +85,12 @@ const generateJSON = () => {
 const loadJSON = () => {
     var data = JSON.parse($("#JSON").val());
     var size = data.size;
-    var levels = data.level;
+    var tiles = data.tiles;
+
     createBoard(size);
-    for (let i = 0; i < levels.length; i++) {
-        var cellData = data.level[i];
-        var cell = document.getElementById("board").children[cellData.z].children[cellData.x];
+    for (let i = 0; i < tiles.length; i++) {
+        var cellData = data.tiles[i];
+        var cell = document.getElementById("board").children[cellData.y].children[cellData.x];
         var colorIndex = relations.findIndex((el) => {
             return el.type == cellData.type;
         });
@@ -115,6 +128,10 @@ $("#sizeChoose").on("input", function () {
 $("#reloadJSON").click(() => {
     loadJSON();
 });
+
+$("body").mouseup(() => {
+    isInTilePlacementMode = false;
+})
 
 createBoard(document.getElementById("sizeChoose").value);
 generateJSON();
