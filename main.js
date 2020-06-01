@@ -99,6 +99,20 @@ const loadJSON = () => {
     }
 }
 
+const restoreStateBeforeLevelResize = () => {
+    const previousLevelData = JSON.parse($("#JSON").val());
+    const previousTiles = previousLevelData.tiles;
+
+    previousTiles.forEach(tile => {
+        try {
+            const HTMLTile = $($("tr").eq(tile.y)[0].children[tile.x]);
+
+            HTMLTile.removeClass();
+            HTMLTile.addClass(activeColor);
+        } catch {}
+    });
+}
+
 //----------- Events: -----------------/
 $("#buttons button").click(function (e) {
     activeType = this.innerHTML;
@@ -122,6 +136,7 @@ $("#buttons button").click(function (e) {
 
 $("#sizeChoose").on("input", function () {
     createBoard($(this).val());
+    restoreStateBeforeLevelResize();
     generateJSON();
 });
 
