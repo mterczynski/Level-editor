@@ -7,19 +7,21 @@ const relations = [
     { type: "player", color: "chartreuse" },
 ];
 
-let activeType = "delete";
-let activeColor = "white";
+let activeType = "wall";
+let activeColor = "lightgreen";
 
-let isInTilePlacementMode = true;
+let isInTilePlacementMode = false;
 
 const createBoard = (size) => {
     document.getElementById("sizeChoose").value = size;
     document.getElementById("board").innerHTML = "";
-    for (var i = 0, buttons = document.getElementById("buttons").children; i < buttons.length; i++) {
-        buttons[i].onclick = function (e) {
-            activeType = e.target.innerHTML;
-        }
-    }
+
+    $("button").click(function(e) {
+        activeType = e.target.innerHTML;
+        $("button").removeClass('active');
+        $(this).addClass('active');
+    });
+
     var board = document.getElementById("board");
     for (var i = 0; i < size; i++) {
         var tr = document.createElement("tr");

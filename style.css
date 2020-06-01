@@ -69,14 +69,18 @@ td{
     top:10vh;
 }
 
-#buttons > * {
+button {
     margin-bottom: 10px;
     font-size: 1.1em;
-    border:0.3vmin solid gray;
+    border: 3px solid gray;
     border-radius: 100000vw;
     width: 8vw;
     max-width: 150px;
     min-width: 90px;
+}
+
+button.active {
+    border: 3px solid black;
 }
 
 #bt1{
