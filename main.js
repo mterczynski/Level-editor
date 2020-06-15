@@ -51,9 +51,8 @@ const createBoard = (size) => {
 
 const generateJSON = () => {
     var panel = $("#JSON");
-    var size = $("#sizeChoose").val();
-    var output =
-    {
+    var size = Number($("#sizeChoose").val());
+    var output = {
         size: size,
         tiles: []
     };
